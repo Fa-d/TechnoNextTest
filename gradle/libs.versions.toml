@@ -23,6 +23,7 @@ hilt = "2.48"
 hiltNavigation = "1.2.0"
 mockito = "5.8.0"
 coroutinesTest = "1.7.3"
+javapoet = "1.13.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -75,6 +76,7 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
 
+javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
 
 # Testing
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
