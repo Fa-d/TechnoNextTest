@@ -1,4 +1,4 @@
-package dev.sadakat.technonexttest.ui.theme
+package dev.sadakat.technonexttest.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
