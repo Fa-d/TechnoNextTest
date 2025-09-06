@@ -58,7 +58,6 @@ class GetAllPostsUseCase @Inject constructor(
             PostSortType.FAVORITES_FIRST -> {
                 processedPosts.sortedWith(compareByDescending<Post> { it.isFavorite }.thenBy { it.id })
             }
-
             PostSortType.ID_ASCENDING -> processedPosts.sortedBy { it.id }
             PostSortType.ID_DESCENDING -> processedPosts.sortedByDescending { it.id }
             PostSortType.TITLE_ALPHABETICAL -> processedPosts.sortedBy { it.title.lowercase() }

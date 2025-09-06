@@ -10,14 +10,12 @@ import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 data class PaginationConfig(
     val enableContentPreprocessing: Boolean = true,
     val enableDuplicateDetection: Boolean = true,
     val maxContentLength: Int = 500,
     val prioritizeFavorites: Boolean = true
 )
-
 
 @Singleton
 class GetPaginatedPostsUseCase @Inject constructor(
@@ -45,7 +43,6 @@ class GetPaginatedPostsUseCase @Inject constructor(
 
         var processedPost = post
 
-        // Business Logic 1: Content Preprocessing
         if (config.enableContentPreprocessing) {
             processedPost = preprocessPostContent(processedPost, config)
         }
@@ -53,6 +50,7 @@ class GetPaginatedPostsUseCase @Inject constructor(
         if (config.enableDuplicateDetection) {
             if (seenPostIds.containsKey(post.id)) {
                 duplicatesFiltered++
+                // Mark as duplicate (could be used by UI to show differently)
 //                processedPost = processedPost.copy(
 //                    title = "${processedPost.title} [Processed]"
 //                )
