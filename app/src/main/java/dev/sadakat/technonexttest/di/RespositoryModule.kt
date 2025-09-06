@@ -17,12 +17,13 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindPostsRepository(postsRepositoryImpl: PostsRepositoryImpl): PostsRepository
+    abstract fun bindPostsRepository(
+        postsRepositoryImpl: PostsRepositoryImpl
+    ): PostsRepository
 
     @Binds
     @Singleton
     abstract fun bindAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl
     ): AuthRepository
-
 }

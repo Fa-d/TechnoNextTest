@@ -9,12 +9,14 @@ import dagger.hilt.components.SingletonComponent
 import dev.sadakat.technonexttest.data.local.database.AppDatabase
 import dev.sadakat.technonexttest.data.local.database.dao.PostDao
 import dev.sadakat.technonexttest.data.local.database.dao.UserDao
+import dev.sadakat.technonexttest.data.local.database.dao.UserFavoriteDao
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
+
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
@@ -31,4 +33,8 @@ object DatabaseModule {
         return database.userDao()
     }
 
+    @Provides
+    fun provideUserFavoriteDao(database: AppDatabase): UserFavoriteDao {
+        return database.userFavoriteDao()
+    }
 }

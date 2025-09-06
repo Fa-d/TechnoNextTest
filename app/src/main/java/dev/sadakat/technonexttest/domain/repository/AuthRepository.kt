@@ -11,4 +11,7 @@ interface AuthRepository {
     fun getCurrentUser(): Flow<User?>
     suspend fun isUserLoggedIn(): Boolean
 
+    suspend fun userExists(email: String): Boolean
+
+
 }

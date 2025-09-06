@@ -9,9 +9,7 @@ object PasswordUtils {
         val digest = MessageDigest.getInstance("SHA-256")
         val saltedPassword = password + salt
         val hashedBytes = digest.digest(saltedPassword.toByteArray())
-        return "${
-            hashedBytes.joinToString("") { "%02x".format(it) }
-        }:$salt"
+        return "${hashedBytes.joinToString("") { "%02x".format(it) }}:$salt"
     }
 
     fun verifyPassword(password: String, hashedPassword: String): Boolean {
@@ -19,10 +17,10 @@ object PasswordUtils {
         if (parts.size != 2) return false
         val (hash, salt) = parts
         val newHash = hashPassword(password, salt).split(":")[0]
-        return newHash == hash
+        return hash == newHash
     }
 
-    fun generateSalt(): String {
+    private fun generateSalt(): String {
         val random = SecureRandom()
         val salt = ByteArray(16)
         random.nextBytes(salt)
@@ -30,7 +28,7 @@ object PasswordUtils {
     }
 
     fun isValidEmail(email: String): Boolean {
-        return email.matches(Regex("[a-zA-Z0-9._%+-]+[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))
+        return email.matches(Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))
     }
 
     fun isValidPassword(password: String): Boolean {

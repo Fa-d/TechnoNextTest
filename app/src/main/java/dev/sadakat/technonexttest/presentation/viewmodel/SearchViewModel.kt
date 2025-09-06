@@ -39,7 +39,8 @@ class SearchViewModel @Inject constructor(
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
 
     init {
-        _searchQuery.debounce(300).distinctUntilChanged().onEach { query ->
+        _searchQuery.debounce(300)
+            .distinctUntilChanged().onEach { query ->
                 _uiState.value = _uiState.value.copy(
                     searchQuery = query,
                     isSearching = query.isNotBlank(),

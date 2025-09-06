@@ -6,15 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.sadakat.technonexttest.data.local.database.dao.PostDao
 import dev.sadakat.technonexttest.data.local.database.dao.UserDao
+import dev.sadakat.technonexttest.data.local.database.dao.UserFavoriteDao
 import dev.sadakat.technonexttest.data.local.database.entities.PostEntity
 import dev.sadakat.technonexttest.data.local.database.entities.UserEntity
+import dev.sadakat.technonexttest.data.local.database.entities.UserFavoriteEntity
 
 @Database(
-    entities = [PostEntity::class, UserEntity::class], version = 1, exportSchema = false
+    entities = [PostEntity::class, UserEntity::class, UserFavoriteEntity::class],
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun postDao(): PostDao
     abstract fun userDao(): UserDao
+    abstract fun userFavoriteDao(): UserFavoriteDao
 
     companion object {
         @Volatile

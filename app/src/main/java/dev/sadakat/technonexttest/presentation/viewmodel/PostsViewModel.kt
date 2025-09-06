@@ -49,7 +49,8 @@ class PostsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(PostsUiState())
     val uiState: StateFlow<PostsUiState> = _uiState.asStateFlow()
 
-    val pagingPosts: Flow<PagingData<Post>> = getPaginatedPostsUseCase().cachedIn(viewModelScope)
+    val pagingPosts: Flow<PagingData<Post>> = getPaginatedPostsUseCase()
+        .cachedIn(viewModelScope)
 
     init {
         loadPosts()
@@ -64,11 +65,15 @@ class PostsViewModel @Inject constructor(
     }
 
     private fun observePosts() {
-        getAllPostsUseCase().onEach { posts ->
-            _uiState.value = _uiState.value.copy(
-                posts = posts, isLoading = false, isRefreshing = false
-            )
-        }.launchIn(viewModelScope)
+        getAllPostsUseCase()
+            .onEach { posts ->
+                _uiState.value = _uiState.value.copy(
+                    posts = posts,
+                    isLoading = false,
+                    isRefreshing = false
+                )
+            }
+            .launchIn(viewModelScope)
     }
 
     fun loadPosts() {
@@ -78,16 +83,17 @@ class PostsViewModel @Inject constructor(
             when (val result = getPostsUseCase(page = 1)) {
                 is NetworkResult.Success -> {
                     _uiState.value = _uiState.value.copy(
-                        isLoading = false, errorMessage = null, currentPage = 1
+                        isLoading = false,
+                        errorMessage = null,
+                        currentPage = 1
                     )
                 }
-
                 is NetworkResult.Error -> {
                     _uiState.value = _uiState.value.copy(
-                        isLoading = false, errorMessage = result.message
+                        isLoading = false,
+                        errorMessage = result.message
                     )
                 }
-
                 is NetworkResult.Loading -> {}
             }
         }
@@ -106,13 +112,12 @@ class PostsViewModel @Inject constructor(
                         hasMorePages = true
                     )
                 }
-
                 is NetworkResult.Error -> {
                     _uiState.value = _uiState.value.copy(
-                        isRefreshing = false, errorMessage = result.message
+                        isRefreshing = false,
+                        errorMessage = result.message
                     )
                 }
-
                 is NetworkResult.Loading -> {
                     // Already handled by isRefreshing state
                 }
@@ -135,13 +140,12 @@ class PostsViewModel @Inject constructor(
                         hasMorePages = result.data.isNotEmpty()
                     )
                 }
-
                 is NetworkResult.Error -> {
                     _uiState.value = _uiState.value.copy(
-                        isLoadingMore = false, errorMessage = result.message
+                        isLoadingMore = false,
+                        errorMessage = result.message
                     )
                 }
-
                 is NetworkResult.Loading -> {
                     // Already handled by isLoadingMore state
                 }
@@ -151,7 +155,7 @@ class PostsViewModel @Inject constructor(
 
     fun toggleFavorite(postId: Int) {
         viewModelScope.launch {
-//            toggleFavoriteUseCase(postId)
+            toggleFavoriteUseCase(postId)
         }
     }
 

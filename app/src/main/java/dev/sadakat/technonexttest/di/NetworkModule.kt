@@ -1,13 +1,10 @@
 package dev.sadakat.technonexttest.di
 
-import android.content.Context
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dev.sadakat.technonexttest.data.local.JsonDataSource
 import dev.sadakat.technonexttest.data.remote.api.PostsApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,13 +46,6 @@ object NetworkModule {
     @Singleton
     fun providesGson(): Gson {
         return Gson()
-    }
-
-
-    @Provides
-    @Singleton
-    fun provideJsonDataSource(@ApplicationContext context: Context, gson: Gson): JsonDataSource {
-        return JsonDataSource(context, gson)
     }
 
 

@@ -26,6 +26,7 @@ data class AuthUiState(
     val isRegistrationMode: Boolean = false
 )
 
+
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val registerUserUseCase: RegisterUserUseCase,
@@ -57,13 +58,11 @@ class AuthViewModel @Inject constructor(
                 is NetworkResult.Success -> {
                     login(email, password)
                 }
-
                 is NetworkResult.Error -> {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false, errorMessage = result.message
                     )
                 }
-
                 is NetworkResult.Loading -> {}
             }
         }
@@ -79,13 +78,11 @@ class AuthViewModel @Inject constructor(
                         isLoading = false, isLoggedIn = true, errorMessage = null
                     )
                 }
-
                 is NetworkResult.Error -> {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false, errorMessage = result.message
                     )
                 }
-
                 is NetworkResult.Loading -> {}
             }
         }

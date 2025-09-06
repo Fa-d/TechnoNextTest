@@ -11,9 +11,9 @@ interface PostsRepository {
     fun getPaginatedPosts(): Flow<PagingData<Post>>
     fun getFavoritePosts(): Flow<List<Post>>
     fun searchPosts(query: String): Flow<List<Post>>
-    suspend fun getPostById(postId: Int): Post?
-    suspend fun toggleFavorite(postId: Int)
     suspend fun refreshPosts(): NetworkResult<Unit>
+    suspend fun getPostById(id: Int): Post?
+    suspend fun toggleFavorite(postId: Int)
     suspend fun loadMorePosts(page: Int): NetworkResult<List<Post>>
 
 }
